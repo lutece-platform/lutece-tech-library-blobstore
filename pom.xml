@@ -1,0 +1,119 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+        <artifactId>lutece-library-pom</artifactId>
+        <groupId>fr.paris.lutece.tools</groupId>
+        <version>2.0.7</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.paris.lutece.plugins</groupId>
+	<artifactId>library-blobstore</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>Lutece blobstore library</name>
+	<repositories>
+		<repository>
+			<id>lutece</id>
+			<name>luteceRepository</name>
+			<url>http://dev.lutece.paris.fr/maven_repository</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>luteceSnapshot</id>
+			<name>luteceSnapshot</name>
+			<url>http://dev.lutece.paris.fr/snapshot_repository</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+    	<!-- Lutece API -->
+    	<dependency>
+			<groupId>fr.paris.lutece.plugins</groupId>
+			<artifactId>library-rbac-api</artifactId>
+			<version>[0.0.1,)</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>fr.paris.lutece.plugins</groupId>
+			<artifactId>library-workgroup-api</artifactId>
+			<version>[0.0.1,)</version>
+			<type>jar</type>
+		</dependency>
+		<!-- Commons -->
+		<dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.lang.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <!-- @Inject API -->
+        <dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
+		</dependency>
+		<!-- Javax -->
+		<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${springVersion}</version>
+        </dependency>
+        <!-- BeanUtils -->
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>${common.beanutils.version}</version>
+        </dependency>
+        <!-- Log4j -->
+        <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <!-- JSON -->
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+	</dependencies>
+	
+	<properties>
+		<componentName>blobstore</componentName>
+		<jiraProjectName>BLOBSTORE</jiraProjectName>
+		<jiraComponentId>10556</jiraComponentId>
+		<commons.lang.version>2.3</commons.lang.version>
+		<javax.inject.version>1</javax.inject.version>
+		<javax.servlet.version>2.5</javax.servlet.version>
+		<springVersion>3.1.0.RELEASE</springVersion>
+		<common.beanutils.version>1.7.0</common.beanutils.version>
+		<log4j.version>1.2.14</log4j.version>
+	</properties>
+    <scm>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-blobstore</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-blobstore</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/technical/plugin-blobstore</url>
+    </scm>
+</project>
