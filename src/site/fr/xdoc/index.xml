@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+	<properties>
+		<title>Librairie Blobstore</title>
+	</properties>
+	<body>
+		<section name="Librairie Blobstore">
+			<subsection name="Introduction">
+				<p>
+					Cette librairie fournit l'ensemble des interfaces DAO pour l'acc&#232;s au blobstore. 
+					Elle fournit &#233;galement les services de blobstore.
+				</p>
+			</subsection>
+		</section>
+	</body>
+</document>
