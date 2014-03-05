@@ -33,8 +33,6 @@
  */
 package fr.paris.lutece.plugins.blobstore.service;
 
-import fr.paris.lutece.plugins.blobstore.service.download.IBlobStoreDownloadUrlService;
-
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -118,18 +116,4 @@ public interface IBlobStoreService extends Serializable
      * @param strName the name
      */
     void setName( String strName );
-
-    /**
-     * Gets the download url service.
-     *
-     * @return the download url service
-     */
-    IBlobStoreDownloadUrlService getDownloadUrlService(  );
-
-    /**
-     * Sets the download url service.
-     *
-     * @param downloadUrlService the new download url service
-     */
-    void setDownloadUrlService( final IBlobStoreDownloadUrlService downloadUrlService );
 }
