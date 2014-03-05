@@ -31,19 +31,6 @@
 	</repositories>
 	
 	<dependencies>
-    	<!-- Lutece API -->
-    	<dependency>
-			<groupId>fr.paris.lutece.plugins</groupId>
-			<artifactId>library-rbac-api</artifactId>
-			<version>[0.0.1,)</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>fr.paris.lutece.plugins</groupId>
-			<artifactId>library-workgroup-api</artifactId>
-			<version>[0.0.1,)</version>
-			<type>jar</type>
-		</dependency>
 		<!-- Commons -->
 		<dependency>
             <groupId>commons-lang</groupId>
@@ -61,24 +48,11 @@
 			<artifactId>javax.inject</artifactId>
 			<version>${javax.inject.version}</version>
 		</dependency>
-		<!-- Javax -->
-		<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${javax.servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>${springVersion}</version>
-        </dependency>
-        <!-- BeanUtils -->
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${common.beanutils.version}</version>
         </dependency>
         <!-- Log4j -->
         <dependency>
@@ -102,18 +76,16 @@
 	
 	<properties>
 		<componentName>blobstore</componentName>
-		<jiraProjectName>BLOBSTORE</jiraProjectName>
-		<jiraComponentId>10556</jiraComponentId>
+		<jiraProjectName>LIBBLOB</jiraProjectName>
+		<jiraComponentId>20259</jiraComponentId>
 		<commons.lang.version>2.3</commons.lang.version>
 		<javax.inject.version>1</javax.inject.version>
-		<javax.servlet.version>2.5</javax.servlet.version>
 		<springVersion>3.1.0.RELEASE</springVersion>
-		<common.beanutils.version>1.7.0</common.beanutils.version>
 		<log4j.version>1.2.14</log4j.version>
 	</properties>
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-blobstore</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/technical/plugin-blobstore</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/technical/plugin-blobstore</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-blobstore</url>
     </scm>
 </project>
