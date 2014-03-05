@@ -48,78 +48,84 @@ import java.io.InputStream;
 public interface IFileSystemBlobStoreDAO
 {
     /**
-     * Inserts the blobStore
+     * Inserts the blobStore.
+     *
      * @param blobStore blobStore
      * @param strBasePath base directory
+     * @param depth the depth
      * @throws IOException ioexception
      * @throws FileAlreadyExistsException if the file already exists
      */
-    void insert( BytesBlobStore blobStore, String strBasePath )
+    void insert( BytesBlobStore blobStore, String strBasePath, Integer depth )
         throws IOException, FileAlreadyExistsException;
 
     /**
-     * Inserts the InputStreamDatabaseBlobStore
+     * Inserts the InputStreamDatabaseBlobStore.
+     *
      * @param blobStore blobStore
      * @param strBasePath base directory
-     * @throws IOException ioexception
+     * @param depth the depth
      * @throws FileAlreadyExistsException if the file already exists
+     * @throws IOException ioexception
      */
-    void insert( InputStreamBlobStore blobStore, String strBasePath )
+    void insert( InputStreamBlobStore blobStore, String strBasePath, Integer depth )
         throws FileAlreadyExistsException, IOException;
 
     /**
-     * Load the data from the table
+     * Load the data from the table.
      *
-     * @param strId
-     *            The identifier
-     * @param strBasePath
-     *            base directory
+     * @param strId            The identifier
+     * @param strBasePath            base directory
+     * @param depth the depth
      * @return the instance of the DatabaseBlobStore
-     * @throws IOException
-     *             ioexception
+     * @throws IOException             ioexception
      */
-    BytesBlobStore load( String strId, String strBasePath )
+    BytesBlobStore load( String strId, String strBasePath, Integer depth )
         throws IOException;
 
     /**
-     * Loads the InputStreamDatabaseBlobStore
+     * Loads the InputStreamDatabaseBlobStore.
      *
-     * @param strId
-     *            id
-     * @param strBasePath
-     *            base path
+     * @param strId            id
+     * @param strBasePath            base path
+     * @param depth the depth
      * @return the InputStreamDatabaseBlobStore
-     * @throws IOException
-     *             ioexception
+     * @throws IOException             ioexception
      */
-    InputStream loadInputStream( String strId, String strBasePath )
+    InputStream loadInputStream( String strId, String strBasePath, Integer depth )
         throws IOException;
 
     /**
-     * Updates the file
+     * Updates the file.
+     *
      * @param blobStore the blob
      * @param strBasePath the base directory
+     * @param depth the depth
      * @throws IOException ioexception
      */
-    void store( BytesBlobStore blobStore, String strBasePath )
+    void store( BytesBlobStore blobStore, String strBasePath, Integer depth )
         throws IOException;
 
     /**
-     * Updates the file
+     * Updates the file.
+     *
      * @param blobStore the blob
      * @param strBasePath the base directory
+     * @param depth the depth
      * @throws IOException ioexception
      */
-    void storeInputStream( InputStreamBlobStore blobStore, String strBasePath )
+    void storeInputStream( InputStreamBlobStore blobStore, String strBasePath, Integer depth )
         throws IOException;
 
     /**
-     * Removes the file
+     * Removes the file.
+     *
      * @param strKey the key
      * @param strBasePath the base directory
+     * @param depth the depth
      * @return <code>true</code> if the file is deleted, <code>false</code> otherwise
      * @throws IOException ioexception
      */
-    boolean delete( String strKey, String strBasePath )
+    boolean delete( String strKey, String strBasePath, Integer depth )
         throws IOException;
 }

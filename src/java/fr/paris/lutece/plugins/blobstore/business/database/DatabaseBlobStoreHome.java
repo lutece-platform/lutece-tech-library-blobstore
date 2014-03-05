@@ -33,12 +33,12 @@
  */
 package fr.paris.lutece.plugins.blobstore.business.database;
 
+import fr.paris.lutece.plugins.blobstore.business.BytesBlobStore;
+import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
+
 import java.io.InputStream;
 
 import javax.inject.Inject;
-
-import fr.paris.lutece.plugins.blobstore.business.BytesBlobStore;
-import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 
 
 /**
@@ -48,7 +48,6 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
 {
     public static final String BEAN_SERVICE = "blobstore.databaseBlobStoreHome";
-
     @Inject
     private IDatabaseBlobStoreDAO _dao;
 
@@ -56,9 +55,9 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#getLastPrimaryKey()
      */
     @Override
-    public String getLastPrimaryKey( )
+    public String getLastPrimaryKey(  )
     {
-        return _dao.loadLastPrimaryKey( );
+        return _dao.loadLastPrimaryKey(  );
     }
 
     /* (non-Javadoc)

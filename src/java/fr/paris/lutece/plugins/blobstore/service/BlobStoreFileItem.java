@@ -33,17 +33,18 @@
  */
 package fr.paris.lutece.plugins.blobstore.service;
 
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
+
+import org.apache.commons.fileupload.FileItem;
+
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
-
-import org.apache.commons.fileupload.FileItem;
-import org.apache.log4j.Logger;
 
 
 /**
@@ -54,7 +55,7 @@ import org.apache.log4j.Logger;
  * FileMetadata.
  * @see #buildFileMetadata(String, long, String)
  * @see #BlobStoreFileItem(String, IBlobStoreService)
- * 
+ *
  */
 public class BlobStoreFileItem implements FileItem
 {
@@ -64,13 +65,13 @@ public class BlobStoreFileItem implements FileItem
     public static final String JSON_KEY_FILE_BLOB_ID = "fileBlobId";
     public static final String JSON_KEY_FILE_METADATA_BLOB_ID = "fileMetadata";
     private static final long serialVersionUID = 1L;
+    private static Logger _logger = Logger.getLogger( "lutece.blobstore" );
     private final IBlobStoreService _blobstoreService;
     private final String _strBlobId;
     private String _strFileName;
     private long _lFileSize;
     private String _strFileBlobId;
     private String _strContentType;
-    private static Logger _logger = Logger.getLogger( "lutece.blobstore" );
 
     /**
      * Builds a fileItem from blobstore. get() method is lazy.
@@ -80,7 +81,8 @@ public class BlobStoreFileItem implements FileItem
      * @param blobstoreService the blob service
      * @throws NoSuchBlobException if blob cannot be parsed
      */
-    public BlobStoreFileItem( String strBlobId, IBlobStoreService blobstoreService ) throws NoSuchBlobException
+    public BlobStoreFileItem( String strBlobId, IBlobStoreService blobstoreService )
+        throws NoSuchBlobException
     {
         _strBlobId = strBlobId;
         _blobstoreService = blobstoreService;
@@ -114,7 +116,7 @@ public class BlobStoreFileItem implements FileItem
      * Gets the metadata blob id
      * @return the metadata blob id
      */
-    public String getBlobId( )
+    public String getBlobId(  )
     {
         return _strBlobId;
     }
@@ -123,7 +125,7 @@ public class BlobStoreFileItem implements FileItem
      * Gets the file blob id
      * @return the file blob id
      */
-    public String getFileBlobId( )
+    public String getFileBlobId(  )
     {
         return _strFileBlobId;
     }
@@ -132,7 +134,7 @@ public class BlobStoreFileItem implements FileItem
      * Deletes both blobs : metadata <strong>AND</strong> content.
      */
     @Override
-    public void delete( )
+    public void delete(  )
     {
         _blobstoreService.delete( _strFileBlobId );
         _blobstoreService.delete( _strBlobId );
@@ -142,7 +144,7 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public byte[] get( )
+    public byte[] get(  )
     {
         return _blobstoreService.getBlob( _strFileBlobId );
     }
@@ -151,7 +153,7 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getContentType( )
+    public String getContentType(  )
     {
         return _strContentType;
     }
@@ -161,7 +163,7 @@ public class BlobStoreFileItem implements FileItem
      * @return null
      */
     @Override
-    public String getFieldName( )
+    public String getFieldName(  )
     {
         return null;
     }
@@ -171,7 +173,7 @@ public class BlobStoreFileItem implements FileItem
      * @throws IOException ioexception
      */
     @Override
-    public InputStream getInputStream( ) throws IOException
+    public InputStream getInputStream(  ) throws IOException
     {
         return _blobstoreService.getBlobInputStream( _strFileBlobId );
     }
@@ -180,7 +182,7 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getName( )
+    public String getName(  )
     {
         return _strFileName;
     }
@@ -191,16 +193,16 @@ public class BlobStoreFileItem implements FileItem
      * @throws IOException ioe
      */
     @Override
-    public OutputStream getOutputStream( ) throws IOException
+    public OutputStream getOutputStream(  ) throws IOException
     {
-        throw new UnsupportedOperationException( );
+        throw new UnsupportedOperationException(  );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long getSize( )
+    public long getSize(  )
     {
         return _lFileSize;
     }
@@ -209,9 +211,9 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getString( )
+    public String getString(  )
     {
-        return new String( get( ) );
+        return new String( get(  ) );
     }
 
     /**
@@ -220,7 +222,7 @@ public class BlobStoreFileItem implements FileItem
     @Override
     public String getString( String encoding ) throws UnsupportedEncodingException
     {
-        return new String( get( ), encoding );
+        return new String( get(  ), encoding );
     }
 
     /**
@@ -228,7 +230,7 @@ public class BlobStoreFileItem implements FileItem
      * @return false
      */
     @Override
-    public boolean isFormField( )
+    public boolean isFormField(  )
     {
         return false;
     }
@@ -238,7 +240,7 @@ public class BlobStoreFileItem implements FileItem
      * @return false
      */
     @Override
-    public boolean isInMemory( )
+    public boolean isInMemory(  )
     {
         return false;
     }
@@ -271,14 +273,14 @@ public class BlobStoreFileItem implements FileItem
     @Override
     public void write( File file ) throws Exception
     {
-        throw new UnsupportedOperationException( );
+        throw new UnsupportedOperationException(  );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String toString( )
+    public String toString(  )
     {
         return "BlobId:" + _strBlobId + " FileBlobId:" + _strFileBlobId + " FileName:" + _strFileName;
     }
@@ -302,7 +304,7 @@ public class BlobStoreFileItem implements FileItem
         }
         catch ( JSONException je )
         {
-            _logger.error( je.getMessage( ), je );
+            _logger.error( je.getMessage(  ), je );
         }
 
         return null;
@@ -317,14 +319,14 @@ public class BlobStoreFileItem implements FileItem
      * @return the json of the fileMetadata to store in BlobStore
      */
     public static final String buildFileMetadata( String strFileName, long lSize, String strFileBlobId,
-            String strContentType )
+        String strContentType )
     {
-        JSONObject json = new JSONObject( );
+        JSONObject json = new JSONObject(  );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_SIZE, Long.toString( lSize ) );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_NAME, strFileName );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_BLOB_ID, strFileBlobId );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_CONTENT_TYPE, strContentType );
 
-        return json.toString( );
+        return json.toString(  );
     }
 }

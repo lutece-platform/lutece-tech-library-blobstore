@@ -31,74 +31,31 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.blobstore.business.database;
+package fr.paris.lutece.plugins.blobstore.service.download;
 
-import fr.paris.lutece.plugins.blobstore.business.BytesBlobStore;
-import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
-
-import java.io.InputStream;
+import java.io.Serializable;
 
 
 /**
- * IBlobStoreDAO.
+ *
+ * Builds download Url. Useful when we want to share a http link, ftp link, or fylesystem link.
+ * @see JSPBlobStoreDownloadUrlService
  */
-public interface IDatabaseBlobStoreDAO
+public interface IBlobStoreDownloadUrlService extends Serializable
 {
     /**
-     * Get the last primary key.
-     *
-     * @return The last primary key
+     * A file URL
+     * @param strBlobStore the blobstore namle
+     * @param strBlobKey the blobstore key
+     * @return the file url
      */
-    String loadLastPrimaryKey(  );
+    String getFileUrl( String strBlobStore, String strBlobKey );
 
     /**
-     * Insert a new record in the table.
-     *
-     * @param blobStore instance of the object to insert
+     * A blob url
+     * @param strBlobStore the blobstore namle
+     * @param strBlobKey the blobstore key
+     * @return the blob url
      */
-    void insert( BytesBlobStore blobStore );
-
-    /**
-     * Load the data from the table.
-     *
-     * @param strId The identifier
-     * @return the instance of the PhysicalFile
-     */
-    BytesBlobStore load( String strId );
-
-    /**
-     * Load the inputstream from the table.
-     *
-     * @param strId The identifier
-     * @return the instance of the PhysicalFile
-     */
-    InputStream loadInputStream( String strId );
-
-    /**
-     * Delete a record from the table.
-     *
-     * @param strId The identifier
-     */
-    void delete( String strId );
-
-    /**
-     * Update the data in the table.
-     *
-     * @param blobStore instance of the object to update
-     */
-    void store( BytesBlobStore blobStore );
-
-    /**
-     * Insert the InputStreamDatabaseBlobStore.
-     *
-     * @param blobStore the InputStreamDatabaseBlobStore
-     */
-    void insert( InputStreamBlobStore blobStore );
-
-    /**
-     * Update the data in the table.
-     *
-     * @param blobStore instance of the object to update
-     */
-    void store( InputStreamBlobStore blobStore );
+    String getDownloadUrl( String strBlobStore, String strBlobKey );
 }

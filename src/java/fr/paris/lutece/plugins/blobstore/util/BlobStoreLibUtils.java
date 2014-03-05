@@ -37,16 +37,16 @@ import java.util.UUID;
 
 
 /**
- * 
+ *
  * BlobStoreUtils
- * 
+ *
  */
 public final class BlobStoreLibUtils
 {
     /**
      * Private constructor
      */
-    private BlobStoreLibUtils( )
+    private BlobStoreLibUtils(  )
     {
     }
 
@@ -54,10 +54,10 @@ public final class BlobStoreLibUtils
      * Generate a new random ID blob
      * @return a new random id blob
      */
-    public static String generateNewIdBlob( )
+    public static String generateNewIdBlob(  )
     {
-        UUID key = UUID.randomUUID( );
+        UUID key = UUID.randomUUID(  );
 
-        return key.toString( );
+        return key.toString(  );
     }
 }

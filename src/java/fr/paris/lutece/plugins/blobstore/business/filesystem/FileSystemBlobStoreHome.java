@@ -33,119 +33,126 @@
  */
 package fr.paris.lutece.plugins.blobstore.business.filesystem;
 
+import fr.paris.lutece.plugins.blobstore.business.BytesBlobStore;
+import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.inject.Inject;
 
-import fr.paris.lutece.plugins.blobstore.business.BytesBlobStore;
-import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
-
 
 /**
- * 
- * FileSystemBlobStoreHome
- * 
+ * FileSystemBlobStoreHome.
  */
 public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
 {
+    /** The Constant BEAN_SERVICE. */
     public static final String BEAN_SERVICE = "blobstore.fileSystemBlobStoreHome";
 
+    /** The _dao. */
     @Inject
     private IFileSystemBlobStoreDAO _dao;
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome
      * #create(fr.paris.lutece.plugins.blobstore.business.BytesBlobStore,
-     * java.lang.String)
+     * java.lang.String, java.lang.Integer)
      */
     @Override
-    public void create( BytesBlobStore blobStore, String strBasePath ) throws IOException, FileAlreadyExistsException
+    public void create( final BytesBlobStore blobStore, final String strBasePath, final Integer depth )
+        throws IOException, FileAlreadyExistsException
     {
-        _dao.insert( blobStore, strBasePath );
+        _dao.insert( blobStore, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome
      * #update(fr.paris.lutece.plugins.blobstore.business.BytesBlobStore,
-     * java.lang.String)
+     * java.lang.String, java.lang.Integer)
      */
     @Override
-    public void update( BytesBlobStore blobStore, String strBasePath ) throws IOException
+    public void update( final BytesBlobStore blobStore, final String strBasePath, final Integer depth )
+        throws IOException
     {
-        _dao.store( blobStore, strBasePath );
+        _dao.store( blobStore, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome
      * #updateInputStream(fr.paris.lutece.plugins.blobstore
-     * .business.InputStreamBlobStore, java.lang.String)
+     * .business.InputStreamBlobStore, java.lang.String, java.lang.Integer)
      */
     @Override
-    public void updateInputStream( InputStreamBlobStore blobStore, String strBasePath ) throws IOException
+    public void updateInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth )
+        throws IOException
     {
-        _dao.storeInputStream( blobStore, strBasePath );
+        _dao.storeInputStream( blobStore, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
-     * IFileSystemBlobStoreHome#remove(java.lang.String, java.lang.String)
+     * IFileSystemBlobStoreHome#remove(java.lang.String, java.lang.String,
+     * java.lang.Integer)
      */
     @Override
-    public boolean remove( String strKey, String strBasePath ) throws IOException
+    public boolean remove( final String strKey, final String strBasePath, final Integer depth )
+        throws IOException
     {
-        return _dao.delete( strKey, strBasePath );
+        return _dao.delete( strKey, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome#findByPrimaryKey(java.lang.String,
-     * java.lang.String)
+     * java.lang.String, java.lang.Integer)
      */
     @Override
-    public BytesBlobStore findByPrimaryKey( String strKey, String strBasePath ) throws IOException
+    public BytesBlobStore findByPrimaryKey( final String strKey, final String strBasePath, final Integer depth )
+        throws IOException
     {
-        return _dao.load( strKey, strBasePath );
+        return _dao.load( strKey, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome#findByPrimaryKeyInputStream(java.lang.String,
-     * java.lang.String)
+     * java.lang.String, java.lang.Integer)
      */
     @Override
-    public InputStream findByPrimaryKeyInputStream( String strKey, String strBasePath ) throws IOException
+    public InputStream findByPrimaryKeyInputStream( final String strKey, final String strBasePath, final Integer depth )
+        throws IOException
     {
-        return _dao.loadInputStream( strKey, strBasePath );
+        return _dao.loadInputStream( strKey, strBasePath, depth );
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see fr.paris.lutece.plugins.blobstore.business.filesystem.
      * IFileSystemBlobStoreHome
      * #createInputStream(fr.paris.lutece.plugins.blobstore
-     * .business.InputStreamBlobStore, java.lang.String)
+     * .business.InputStreamBlobStore, java.lang.String, java.lang.Integer)
      */
     @Override
-    public void createInputStream( InputStreamBlobStore blobStore, String strBasePath )
-            throws FileAlreadyExistsException, IOException
+    public void createInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth )
+        throws FileAlreadyExistsException, IOException
     {
-        _dao.insert( blobStore, strBasePath );
+        _dao.insert( blobStore, strBasePath, depth );
     }
 }
