@@ -8,7 +8,7 @@
 	<groupId>fr.paris.lutece.plugins</groupId>
 	<artifactId>library-blobstore</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>Lutece blobstore library</name>
 	<repositories>
 		<repository>
@@ -84,8 +84,8 @@
 		<log4j.version>1.2.14</log4j.version>
 	</properties>
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/library-blobstore-1.0.0</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/library-blobstore-1.0.0</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/tags/library-blobstore-1.0.0</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-blobstore</url>
     </scm>
 </project>
