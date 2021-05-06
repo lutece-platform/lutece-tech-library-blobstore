@@ -35,6 +35,8 @@ package fr.paris.lutece.plugins.blobstore.service;
 
 import java.io.InputStream;
 import java.io.Serializable;
+import org.apache.commons.fileupload.FileItem;
+
 
 
 /**
@@ -69,6 +71,14 @@ public interface IBlobStoreService extends Serializable
      * @return the {@link InputStream}
      */
     InputStream getBlobInputStream( String strKey );
+
+    /**
+     * Stores a FileItem
+     *
+     * @param fileItem
+     * @return The key of the blob
+     */
+    String storeFileItem( FileItem fileItem );
 
     /**
      * Update a blob
