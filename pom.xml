@@ -84,8 +84,8 @@
         <log4j.version>1.2.14</log4j.version>
     </properties>
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/library/library-blobstore</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/library/library-blobstore</url>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore</developerConnection>
+        <url>https://github.com/lutece-platform/lutece-tech-library-blobstore.git</url>
     </scm>
 </project>
