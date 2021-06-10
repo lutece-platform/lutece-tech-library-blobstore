@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.blobstore.business;
 
-
 /**
  *
  * class BytesBlobStore
@@ -42,20 +41,23 @@ package fr.paris.lutece.plugins.blobstore.business;
 public class BytesBlobStore
 {
     private String _strId;
-    private byte[] _byValue;
+    private byte [ ] _byValue;
 
     /**
      * Get the id
+     * 
      * @return the id
      */
-    public String getId(  )
+    public String getId( )
     {
         return _strId;
     }
 
     /**
      * Set the id
-     * @param strId the id
+     * 
+     * @param strId
+     *            the id
      */
     public void setId( String strId )
     {
@@ -64,18 +66,21 @@ public class BytesBlobStore
 
     /**
      * Get the value
+     * 
      * @return the value
      */
-    public byte[] getValue(  )
+    public byte [ ] getValue( )
     {
         return _byValue;
     }
 
     /**
      * Set the value
-     * @param value the value
+     * 
+     * @param value
+     *            the value
      */
-    public void setValue( byte[] value )
+    public void setValue( byte [ ] value )
     {
         _byValue = value;
     }

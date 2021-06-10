@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,7 +39,6 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 import java.io.IOException;
 import java.io.InputStream;
 
-
 /**
  * The Interface IFileSystemBlobStoreHome.
  */
@@ -48,88 +47,106 @@ public interface IFileSystemBlobStoreHome
     /**
      * Creation of an instance of record physical file.
      *
-     * @param blobStore The instance of the physical file which contains the
-     *            informations to store
-     * @param strBasePath base directory
-     * @param depth the depth
-     * @throws IOException ioe
-     * @throws FileAlreadyExistsException already exists
+     * @param blobStore
+     *            The instance of the physical file which contains the informations to store
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
+     * @throws IOException
+     *             ioe
+     * @throws FileAlreadyExistsException
+     *             already exists
      */
-    void create( final BytesBlobStore blobStore, final String strBasePath, final Integer depth )
-        throws IOException, FileAlreadyExistsException;
+    void create( final BytesBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException, FileAlreadyExistsException;
 
     /**
      * Update of physical file which is specified in parameter.
      *
-     * @param blobStore the blob store
-     * @param strBasePath base directory
-     * @param depth the depth
-     * @throws IOException ioe
+     * @param blobStore
+     *            the blob store
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
+     * @throws IOException
+     *             ioe
      */
-    void update( final BytesBlobStore blobStore, final String strBasePath, final Integer depth )
-        throws IOException;
+    void update( final BytesBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException;
 
     /**
      * Update of physical file which is specified in parameter.
      *
-     * @param blobStore The instance of the record physicalFile which contains
-     *            the informations to update
-     * @param strBasePath base directory
-     * @param depth the depth
-     * @throws IOException ioe
+     * @param blobStore
+     *            The instance of the record physicalFile which contains the informations to update
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
+     * @throws IOException
+     *             ioe
      */
-    void updateInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth )
-        throws IOException;
+    void updateInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException;
 
     /**
      * Delete the physical file whose identifier is specified in parameter.
      *
-     * @param strKey The identifier of the record physical file
-     * @param strBasePath base directory
-     * @param depth the depth
-     * @return <code>true</code> if the file is removed, <code>false</code>
-     *         otherwise.
-     * @throws IOException ioe
+     * @param strKey
+     *            The identifier of the record physical file
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
+     * @return <code>true</code> if the file is removed, <code>false</code> otherwise.
+     * @throws IOException
+     *             ioe
      */
-    boolean remove( final String strKey, final String strBasePath, final Integer depth )
-        throws IOException;
+    boolean remove( final String strKey, final String strBasePath, final Integer depth ) throws IOException;
 
     /**
-     * Returns an instance of a physical file whose identifier is specified in
-     * parameter.
+     * Returns an instance of a physical file whose identifier is specified in parameter.
      *
-     * @param strKey The file primary key
-     * @param strBasePath base directory
-     * @param depth the depth
+     * @param strKey
+     *            The file primary key
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
      * @return an instance of physical file
-     * @throws IOException ioe
+     * @throws IOException
+     *             ioe
      */
-    BytesBlobStore findByPrimaryKey( final String strKey, final String strBasePath, final Integer depth )
-        throws IOException;
+    BytesBlobStore findByPrimaryKey( final String strKey, final String strBasePath, final Integer depth ) throws IOException;
 
     /**
-     * Returns an instance of a physical file whose identifier is specified in
-     * parameter.
+     * Returns an instance of a physical file whose identifier is specified in parameter.
      *
-     * @param strKey The file primary key
-     * @param strBasePath base directory
-     * @param depth the depth
+     * @param strKey
+     *            The file primary key
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
      * @return an instance of physical file
-     * @throws IOException ioe
+     * @throws IOException
+     *             ioe
      */
-    InputStream findByPrimaryKeyInputStream( final String strKey, final String strBasePath, final Integer depth )
-        throws IOException;
+    InputStream findByPrimaryKeyInputStream( final String strKey, final String strBasePath, final Integer depth ) throws IOException;
 
     /**
      * Creation of an instance of record physical file.
      *
-     * @param blobStore The instance of the physical file which contains the
-     *            inputstream to store
-     * @param strBasePath base directory
-     * @param depth the depth
-     * @throws FileAlreadyExistsException already exists
-     * @throws IOException ioe
+     * @param blobStore
+     *            The instance of the physical file which contains the inputstream to store
+     * @param strBasePath
+     *            base directory
+     * @param depth
+     *            the depth
+     * @throws FileAlreadyExistsException
+     *             already exists
+     * @throws IOException
+     *             ioe
      */
     void createInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth )
-        throws FileAlreadyExistsException, IOException;
+            throws FileAlreadyExistsException, IOException;
 }

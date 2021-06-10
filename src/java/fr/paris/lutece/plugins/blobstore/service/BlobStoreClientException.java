@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.blobstore.service;
 
-
 /**
  *
  * BlobStoreClientException
@@ -45,7 +44,9 @@ public class BlobStoreClientException extends Exception
 
     /**
      * Constructor
-     * @param strMessage the message
+     * 
+     * @param strMessage
+     *            the message
      */
     public BlobStoreClientException( String strMessage )
     {

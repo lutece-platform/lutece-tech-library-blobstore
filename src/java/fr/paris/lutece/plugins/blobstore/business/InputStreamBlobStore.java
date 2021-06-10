@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,6 @@ package fr.paris.lutece.plugins.blobstore.business;
 
 import java.io.InputStream;
 
-
 /**
  * BlobStore wrapping an {@link InputStream}
  *
@@ -47,16 +46,19 @@ public class InputStreamBlobStore
 
     /**
      * Get the id
+     * 
      * @return the id
      */
-    public String getId(  )
+    public String getId( )
     {
         return _strId;
     }
 
     /**
      * Set the id
-     * @param strId the id
+     * 
+     * @param strId
+     *            the id
      */
     public void setId( String strId )
     {
@@ -65,16 +67,19 @@ public class InputStreamBlobStore
 
     /**
      * Get the inputStream
+     * 
      * @return the inputStream
      */
-    public InputStream getInputStream(  )
+    public InputStream getInputStream( )
     {
         return _inputStream;
     }
 
     /**
      * Set the inputStream
-     * @param inputStream the inputStream
+     * 
+     * @param inputStream
+     *            the inputStream
      */
     public void setInputStream( InputStream inputStream )
     {

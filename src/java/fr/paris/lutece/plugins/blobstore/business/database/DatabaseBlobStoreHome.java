@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,10 +40,8 @@ import java.io.InputStream;
 
 import javax.inject.Inject;
 
-
 /**
- * This class provides instances management methods (create, find, ...) for
- * physical file objects
+ * This class provides instances management methods (create, find, ...) for physical file objects
  */
 public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
 {
@@ -51,16 +49,20 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Inject
     private IDatabaseBlobStoreDAO _dao;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#getLastPrimaryKey()
      */
     @Override
-    public String getLastPrimaryKey(  )
+    public String getLastPrimaryKey( )
     {
-        return _dao.loadLastPrimaryKey(  );
+        return _dao.loadLastPrimaryKey( );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#create(fr.paris.lutece.plugins.blobstore.business.BytesBlobStore)
      */
     @Override
@@ -69,7 +71,9 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         _dao.insert( blobStore );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#update(fr.paris.lutece.plugins.blobstore.business.BytesBlobStore)
      */
     @Override
@@ -78,8 +82,11 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         _dao.store( blobStore );
     }
 
-    /* (non-Javadoc)
-     * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#updateInputStream(fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#updateInputStream(fr.paris.lutece.plugins.blobstore.business.
+     * InputStreamBlobStore)
      */
     @Override
     public void updateInputStream( InputStreamBlobStore blobStore )
@@ -87,7 +94,9 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         _dao.store( blobStore );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#remove(java.lang.String)
      */
     @Override
@@ -96,7 +105,9 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         _dao.delete( strKey );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#findByPrimaryKey(java.lang.String)
      */
     @Override
@@ -105,7 +116,9 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         return _dao.load( strKey );
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#findByPrimaryKeyInputStream(java.lang.String)
      */
     @Override
@@ -114,8 +127,11 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
         return _dao.loadInputStream( strKey );
     }
 
-    /* (non-Javadoc)
-     * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#createInputStream(fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.paris.lutece.plugins.blobstore.business.database.IDatabaseBlobStoreHome#createInputStream(fr.paris.lutece.plugins.blobstore.business.
+     * InputStreamBlobStore)
      */
     @Override
     public void createInputStream( InputStreamBlobStore blobStore )

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,6 @@ import java.io.InputStream;
 import java.io.Serializable;
 import org.apache.commons.fileupload.FileItem;
 
-
-
 /**
  * Blob Store Service Interface. <i>*InputStream</i> methods should be used for very large blobs.
  */
@@ -46,28 +44,36 @@ public interface IBlobStoreService extends Serializable
 {
     /**
      * Store a blob
-     * @param blob The blob
+     * 
+     * @param blob
+     *            The blob
      * @return The key of the blob
      */
-    String store( byte[] blob );
+    String store( byte [ ] blob );
 
     /**
      * Stores an input stream
-     * @param inputStream the input stream
+     * 
+     * @param inputStream
+     *            the input stream
      * @return The key of the blob
      */
     String storeInputStream( InputStream inputStream );
 
     /**
      * Get a blob
-     * @param strKey The key of the blob
-     * @return  The blob
+     * 
+     * @param strKey
+     *            The key of the blob
+     * @return The blob
      */
-    byte[] getBlob( String strKey );
+    byte [ ] getBlob( String strKey );
 
     /**
      * Gets a blob as {@link InputStream}
-     * @param strKey the key
+     * 
+     * @param strKey
+     *            the key
      * @return the {@link InputStream}
      */
     InputStream getBlobInputStream( String strKey );
@@ -82,48 +88,62 @@ public interface IBlobStoreService extends Serializable
 
     /**
      * Update a blob
-     * @param strKey The key of the blob
-     * @param blob The new blob
+     * 
+     * @param strKey
+     *            The key of the blob
+     * @param blob
+     *            The new blob
      */
-    void update( String strKey, byte[] blob );
+    void update( String strKey, byte [ ] blob );
 
     /**
      * Updates a blob key with the inputstream
-     * @param strKey the blob key
-     * @param inputStream the input stream
+     * 
+     * @param strKey
+     *            the blob key
+     * @param inputStream
+     *            the input stream
      */
     void updateInputStream( String strKey, InputStream inputStream );
 
     /**
      * Delete a blob
-     * @param strKey The key of the blob
+     * 
+     * @param strKey
+     *            The key of the blob
      */
     void delete( String strKey );
 
     /**
      * Gets the blob URL.
      *
-     * @param strKey the str key
+     * @param strKey
+     *            the str key
      * @return the blob url
      */
     String getBlobUrl( String strKey );
 
     /**
      * Gets the file download url (for {@link BlobStoreFileItem})
-     * @param strKey the
+     * 
+     * @param strKey
+     *            the
      * @return the download link
      */
     String getFileUrl( String strKey );
 
     /**
      * Gets the blobstore name
+     * 
      * @return the blobstore name
      */
-    String getName(  );
+    String getName( );
 
     /**
      * Sets the blobstore name
-     * @param strName the name
+     * 
+     * @param strName
+     *            the name
      */
     void setName( String strName );
 }

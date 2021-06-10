@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,6 @@ package fr.paris.lutece.plugins.blobstore.util;
 
 import java.util.UUID;
 
-
 /**
  *
  * BlobStoreUtils
@@ -46,18 +45,19 @@ public final class BlobStoreLibUtils
     /**
      * Private constructor
      */
-    private BlobStoreLibUtils(  )
+    private BlobStoreLibUtils( )
     {
     }
 
     /**
      * Generate a new random ID blob
+     * 
      * @return a new random id blob
      */
-    public static String generateNewIdBlob(  )
+    public static String generateNewIdBlob( )
     {
-        UUID key = UUID.randomUUID(  );
+        UUID key = UUID.randomUUID( );
 
-        return key.toString(  );
+        return key.toString( );
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,6 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 
 import java.io.InputStream;
 
-
 /**
  * IBlobStoreDAO.
  */
@@ -49,19 +48,21 @@ public interface IDatabaseBlobStoreDAO
      *
      * @return The last primary key
      */
-    String loadLastPrimaryKey(  );
+    String loadLastPrimaryKey( );
 
     /**
      * Insert a new record in the table.
      *
-     * @param blobStore instance of the object to insert
+     * @param blobStore
+     *            instance of the object to insert
      */
     void insert( BytesBlobStore blobStore );
 
     /**
      * Load the data from the table.
      *
-     * @param strId The identifier
+     * @param strId
+     *            The identifier
      * @return the instance of the PhysicalFile
      */
     BytesBlobStore load( String strId );
@@ -69,7 +70,8 @@ public interface IDatabaseBlobStoreDAO
     /**
      * Load the inputstream from the table.
      *
-     * @param strId The identifier
+     * @param strId
+     *            The identifier
      * @return the instance of the PhysicalFile
      */
     InputStream loadInputStream( String strId );
@@ -77,28 +79,32 @@ public interface IDatabaseBlobStoreDAO
     /**
      * Delete a record from the table.
      *
-     * @param strId The identifier
+     * @param strId
+     *            The identifier
      */
     void delete( String strId );
 
     /**
      * Update the data in the table.
      *
-     * @param blobStore instance of the object to update
+     * @param blobStore
+     *            instance of the object to update
      */
     void store( BytesBlobStore blobStore );
 
     /**
      * Insert the InputStreamDatabaseBlobStore.
      *
-     * @param blobStore the InputStreamDatabaseBlobStore
+     * @param blobStore
+     *            the InputStreamDatabaseBlobStore
      */
     void insert( InputStreamBlobStore blobStore );
 
     /**
      * Update the data in the table.
      *
-     * @param blobStore instance of the object to update
+     * @param blobStore
+     *            instance of the object to update
      */
     void store( InputStreamBlobStore blobStore );
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,6 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 
 import java.io.InputStream;
 
-
 /**
  * The Interface IDatabaseBlobStoreHome.
  */
@@ -49,53 +48,54 @@ public interface IDatabaseBlobStoreHome
      *
      * @return The last primary key
      */
-    String getLastPrimaryKey(  );
+    String getLastPrimaryKey( );
 
     /**
      * Creation of an instance of record physical file.
      *
-     * @param blobStore The instance of the physical file which contains the
-     *            informations to store
+     * @param blobStore
+     *            The instance of the physical file which contains the informations to store
      */
     void create( BytesBlobStore blobStore );
 
     /**
      * Update of physical file which is specified in parameter.
      *
-     * @param blobStore The instance of the record physicalFile which contains
-     *            the informations to update
+     * @param blobStore
+     *            The instance of the record physicalFile which contains the informations to update
      */
     void update( BytesBlobStore blobStore );
 
     /**
      * Update of physical file which is specified in parameter.
      *
-     * @param blobStore The instance of the record physicalFile which contains
-     *            the informations to update
+     * @param blobStore
+     *            The instance of the record physicalFile which contains the informations to update
      */
     void updateInputStream( InputStreamBlobStore blobStore );
 
     /**
      * Delete the physical file whose identifier is specified in parameter.
      *
-     * @param strKey The identifier of the record physical file
+     * @param strKey
+     *            The identifier of the record physical file
      */
     void remove( String strKey );
 
     /**
-     * Returns an instance of a physical file whose identifier is specified in
-     * parameter.
+     * Returns an instance of a physical file whose identifier is specified in parameter.
      *
-     * @param strKey The file primary key
+     * @param strKey
+     *            The file primary key
      * @return an instance of physical file
      */
     BytesBlobStore findByPrimaryKey( String strKey );
 
     /**
-     * Returns an instance of a physical file whose identifier is specified in
-     * parameter.
+     * Returns an instance of a physical file whose identifier is specified in parameter.
      *
-     * @param strKey The file primary key
+     * @param strKey
+     *            The file primary key
      * @return an instance of physical file
      */
     InputStream findByPrimaryKeyInputStream( String strKey );
@@ -103,8 +103,8 @@ public interface IDatabaseBlobStoreHome
     /**
      * Creation of an instance of record physical file.
      *
-     * @param blobStore The instance of the physical file which contains the
-     *            inputstream to store
+     * @param blobStore
+     *            The instance of the physical file which contains the inputstream to store
      */
     void createInputStream( InputStreamBlobStore blobStore );
 }

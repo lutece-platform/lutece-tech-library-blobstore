@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,13 +46,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-
 /**
  * Builds a fileItem from blobstore implementing {@link FileItem}. <br>
- * Metadata is stored in one blob, and content in another one.
- * get() method is lazy preventing blob to be stored in-memory.
- * Use {@link #buildFileMetadata(String, long, String)} to build the
- * FileMetadata.
+ * Metadata is stored in one blob, and content in another one. get() method is lazy preventing blob to be stored in-memory. Use
+ * {@link #buildFileMetadata(String, long, String)} to build the FileMetadata.
+ * 
  * @see #buildFileMetadata(String, long, String)
  * @see #BlobStoreFileItem(String, IBlobStoreService)
  *
@@ -74,21 +72,23 @@ public class BlobStoreFileItem implements FileItem
     private String _strContentType;
 
     /**
-     * Builds a fileItem from blobstore. get() method is lazy.
-     * The {@link IBlobStoreService} is here to prevent specific usage for the
-     * fileItem so it can be used as any other FileItem.
-     * @param strBlobId the blob id
-     * @param blobstoreService the blob service
-     * @throws NoSuchBlobException if blob cannot be parsed
+     * Builds a fileItem from blobstore. get() method is lazy. The {@link IBlobStoreService} is here to prevent specific usage for the fileItem so it can be
+     * used as any other FileItem.
+     * 
+     * @param strBlobId
+     *            the blob id
+     * @param blobstoreService
+     *            the blob service
+     * @throws NoSuchBlobException
+     *             if blob cannot be parsed
      */
-    public BlobStoreFileItem( String strBlobId, IBlobStoreService blobstoreService )
-        throws NoSuchBlobException
+    public BlobStoreFileItem( String strBlobId, IBlobStoreService blobstoreService ) throws NoSuchBlobException
     {
         _strBlobId = strBlobId;
         _blobstoreService = blobstoreService;
 
         // first, get the metadata
-        byte[] blob = _blobstoreService.getBlob( _strBlobId );
+        byte [ ] blob = _blobstoreService.getBlob( _strBlobId );
 
         if ( blob == null )
         {
@@ -114,18 +114,20 @@ public class BlobStoreFileItem implements FileItem
 
     /**
      * Gets the metadata blob id
+     * 
      * @return the metadata blob id
      */
-    public String getBlobId(  )
+    public String getBlobId( )
     {
         return _strBlobId;
     }
 
     /**
      * Gets the file blob id
+     * 
      * @return the file blob id
      */
-    public String getFileBlobId(  )
+    public String getFileBlobId( )
     {
         return _strFileBlobId;
     }
@@ -134,7 +136,7 @@ public class BlobStoreFileItem implements FileItem
      * Deletes both blobs : metadata <strong>AND</strong> content.
      */
     @Override
-    public void delete(  )
+    public void delete( )
     {
         _blobstoreService.delete( _strFileBlobId );
         _blobstoreService.delete( _strBlobId );
@@ -144,7 +146,7 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public byte[] get(  )
+    public byte [ ] get( )
     {
         return _blobstoreService.getBlob( _strFileBlobId );
     }
@@ -153,27 +155,30 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getContentType(  )
+    public String getContentType( )
     {
         return _strContentType;
     }
 
     /**
      * Not supported
+     * 
      * @return null
      */
     @Override
-    public String getFieldName(  )
+    public String getFieldName( )
     {
         return null;
     }
 
     /**
      * {@inheritDoc}
-     * @throws IOException ioexception
+     * 
+     * @throws IOException
+     *             ioexception
      */
     @Override
-    public InputStream getInputStream(  ) throws IOException
+    public InputStream getInputStream( ) throws IOException
     {
         return _blobstoreService.getBlobInputStream( _strFileBlobId );
     }
@@ -182,27 +187,29 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getName(  )
+    public String getName( )
     {
         return _strFileName;
     }
 
     /**
      * Not supported - throws UnsupportedOperationException exception
+     * 
      * @return nothing
-     * @throws IOException ioe
+     * @throws IOException
+     *             ioe
      */
     @Override
-    public OutputStream getOutputStream(  ) throws IOException
+    public OutputStream getOutputStream( ) throws IOException
     {
-        throw new UnsupportedOperationException(  );
+        throw new UnsupportedOperationException( );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public long getSize(  )
+    public long getSize( )
     {
         return _lFileSize;
     }
@@ -211,9 +218,9 @@ public class BlobStoreFileItem implements FileItem
      * {@inheritDoc}
      */
     @Override
-    public String getString(  )
+    public String getString( )
     {
-        return new String( get(  ) );
+        return new String( get( ) );
     }
 
     /**
@@ -222,32 +229,36 @@ public class BlobStoreFileItem implements FileItem
     @Override
     public String getString( String encoding ) throws UnsupportedEncodingException
     {
-        return new String( get(  ), encoding );
+        return new String( get( ), encoding );
     }
 
     /**
      * Not supported
+     * 
      * @return false
      */
     @Override
-    public boolean isFormField(  )
+    public boolean isFormField( )
     {
         return false;
     }
 
     /**
      * Always false.
+     * 
      * @return false
      */
     @Override
-    public boolean isInMemory(  )
+    public boolean isInMemory( )
     {
         return false;
     }
 
     /**
      * Not supported
-     * @param name -
+     * 
+     * @param name
+     *            -
      */
     @Override
     public void setFieldName( String name )
@@ -257,7 +268,9 @@ public class BlobStoreFileItem implements FileItem
 
     /**
      * Not supported
-     * @param state -
+     * 
+     * @param state
+     *            -
      */
     @Override
     public void setFormField( boolean state )
@@ -267,31 +280,35 @@ public class BlobStoreFileItem implements FileItem
 
     /**
      * Not supported
-     * @param file -
-     * @throws Exception ex
+     * 
+     * @param file
+     *            -
+     * @throws Exception
+     *             ex
      */
     @Override
     public void write( File file ) throws Exception
     {
-        throw new UnsupportedOperationException(  );
+        throw new UnsupportedOperationException( );
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String toString(  )
+    public String toString( )
     {
         return "BlobId:" + _strBlobId + " FileBlobId:" + _strFileBlobId + " FileName:" + _strFileName;
     }
 
     /**
      * Parses a blob to a JSONObject
-     * @param blob the blob
-     * @return the {@link JSONObject}, <code>null</code> if blob is null or an
-     *         exception occur
+     * 
+     * @param blob
+     *            the blob
+     * @return the {@link JSONObject}, <code>null</code> if blob is null or an exception occur
      */
-    private static JSONObject parseBlob( byte[] blob )
+    private static JSONObject parseBlob( byte [ ] blob )
     {
         if ( blob == null )
         {
@@ -302,9 +319,9 @@ public class BlobStoreFileItem implements FileItem
         {
             return JSONObject.fromObject( new String( blob ) );
         }
-        catch ( JSONException je )
+        catch( JSONException je )
         {
-            _logger.error( je.getMessage(  ), je );
+            _logger.error( je.getMessage( ), je );
         }
 
         return null;
@@ -312,21 +329,25 @@ public class BlobStoreFileItem implements FileItem
 
     /**
      * Builds the json value of a file metadata.
-     * @param strFileName filename
-     * @param lSize size
-     * @param strFileBlobId the blob id
-     * @param strContentType the content type
+     * 
+     * @param strFileName
+     *            filename
+     * @param lSize
+     *            size
+     * @param strFileBlobId
+     *            the blob id
+     * @param strContentType
+     *            the content type
      * @return the json of the fileMetadata to store in BlobStore
      */
-    public static final String buildFileMetadata( String strFileName, long lSize, String strFileBlobId,
-        String strContentType )
+    public static final String buildFileMetadata( String strFileName, long lSize, String strFileBlobId, String strContentType )
     {
-        JSONObject json = new JSONObject(  );
+        JSONObject json = new JSONObject( );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_SIZE, Long.toString( lSize ) );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_NAME, strFileName );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_BLOB_ID, strFileBlobId );
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_CONTENT_TYPE, strContentType );
 
-        return json.toString(  );
+        return json.toString( );
     }
 }

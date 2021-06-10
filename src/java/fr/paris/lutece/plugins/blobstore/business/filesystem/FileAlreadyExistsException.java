@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2014, Mairie de Paris
+ * Copyright (c) 2002-2021, City of Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,6 @@
  */
 package fr.paris.lutece.plugins.blobstore.business.filesystem;
 
-
 /**
  * FileAlreadyExistsException
  *
@@ -44,7 +43,9 @@ public class FileAlreadyExistsException extends Exception
 
     /**
      * FileAlreadyExistsException
-     * @param strMessage the message
+     * 
+     * @param strMessage
+     *            the message
      */
     public FileAlreadyExistsException( String strMessage )
     {
