@@ -38,7 +38,8 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.fileupload.FileItem;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class BlobStoreFileItem implements FileItem
     public static final String JSON_KEY_FILE_BLOB_ID = "fileBlobId";
     public static final String JSON_KEY_FILE_METADATA_BLOB_ID = "fileMetadata";
     private static final long serialVersionUID = 1L;
-    private static Logger _logger = Logger.getLogger( "lutece.blobstore" );
+    private static Logger _logger = LogManager.getLogger( "lutece.blobstore" );
     private final IBlobStoreService _blobstoreService;
     private final String _strBlobId;
     private String _strFileName;
