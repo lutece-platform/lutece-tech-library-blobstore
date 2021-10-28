@@ -46,6 +46,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import org.apache.commons.fileupload.FileItemHeaders;
 
 /**
  * Builds a fileItem from blobstore implementing {@link FileItem}. <br>
@@ -350,5 +351,15 @@ public class BlobStoreFileItem implements FileItem
         json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_CONTENT_TYPE, strContentType );
 
         return json.toString( );
+    }
+
+    @Override
+    public FileItemHeaders getHeaders() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setHeaders(FileItemHeaders fih) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
