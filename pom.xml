@@ -2,7 +2,7 @@
     <parent>
         <artifactId>lutece-global-pom</artifactId>
         <groupId>fr.paris.lutece.tools</groupId>
-        <version>5.1.1</version>
+        <version>5.2.0</version>
     </parent>	
     <modelVersion>4.0.0</modelVersion>
     <groupId>fr.paris.lutece.plugins</groupId>
@@ -33,9 +33,9 @@
     <dependencies>
         <!-- Commons -->
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>${commons.lang.version}</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
@@ -78,7 +78,6 @@
         <componentName>blobstore</componentName>
         <jiraProjectName>LIBBLOB</jiraProjectName>
         <jiraComponentId>20259</jiraComponentId>
-        <commons.lang.version>2.3</commons.lang.version>
         <javax.inject.version>1</javax.inject.version>
         <springVersion>3.1.0.RELEASE</springVersion>
         <log4j.version>2.14.1</log4j.version>
