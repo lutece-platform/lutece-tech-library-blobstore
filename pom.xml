@@ -83,8 +83,8 @@
         <log4j.version>2.14.1</log4j.version>
     </properties>
     <scm>
-        <connection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore</connection>
-        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore</developerConnection>
+        <connection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore.git</connection>
+        <developerConnection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-tech-library-blobstore.git</url>
       <tag>HEAD</tag>
   </scm>
