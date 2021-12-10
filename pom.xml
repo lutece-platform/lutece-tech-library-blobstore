@@ -80,7 +80,7 @@
         <jiraComponentId>20259</jiraComponentId>
         <javax.inject.version>1</javax.inject.version>
         <springVersion>3.1.0.RELEASE</springVersion>
-        <log4j.version>2.14.1</log4j.version>
+        <log4j.version>2.15.0</log4j.version>
     </properties>
     <scm>
         <connection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore.git</connection>
