@@ -8,7 +8,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>library-blobstore</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <name>Lutece blobstore library</name>
     <repositories>
         <repository>
@@ -86,6 +86,6 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-tech-library-blobstore.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-tech-library-blobstore.git</url>
-      <tag>HEAD</tag>
+      <tag>library-blobstore-1.0.4</tag>
   </scm>
 </project>
