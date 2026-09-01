@@ -48,12 +48,6 @@
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject.version}</version>
         </dependency>
-        <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${springVersion}</version>
-        </dependency>
         <!-- Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -79,7 +73,6 @@
         <jiraProjectName>LIBBLOB</jiraProjectName>
         <jiraComponentId>20259</jiraComponentId>
         <javax.inject.version>1</javax.inject.version>
-        <springVersion>3.1.0.RELEASE</springVersion>
         <log4j.version>2.17.0</log4j.version>
     </properties>
     <scm>
