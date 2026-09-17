@@ -39,19 +39,36 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * FileSystemBlobStoreHome.
  */
-public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
+@ApplicationScoped
+@Named( FileSystemBlobStoreHome.BEAN_SERVICE )
+public class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
 {
     /** The Constant BEAN_SERVICE. */
     public static final String BEAN_SERVICE = "blobstore.fileSystemBlobStoreHome";
 
-    /** The _dao. */
+    /** The getDao( ). */
     @Inject
-    private IFileSystemBlobStoreDAO _dao;
+    private Instance<IFileSystemBlobStoreDAO> _dao;
+
+    /**
+     * Resolves the DAO, whose implementation is deployed by plugin-blobstore.
+     * 
+     * @return the DAO
+     * @throws jakarta.enterprise.inject.UnsatisfiedResolutionException
+     *             when no blob store DAO is deployed
+     */
+    private IFileSystemBlobStoreDAO getDao( )
+    {
+        return _dao.get( );
+    }
 
     /*
      * (non-Javadoc)
@@ -62,7 +79,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public void create( final BytesBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException, FileAlreadyExistsException
     {
-        _dao.insert( blobStore, strBasePath, depth );
+        getDao( ).insert( blobStore, strBasePath, depth );
     }
 
     /*
@@ -74,7 +91,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public void update( final BytesBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException
     {
-        _dao.store( blobStore, strBasePath, depth );
+        getDao( ).store( blobStore, strBasePath, depth );
     }
 
     /*
@@ -86,7 +103,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public void updateInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth ) throws IOException
     {
-        _dao.storeInputStream( blobStore, strBasePath, depth );
+        getDao( ).storeInputStream( blobStore, strBasePath, depth );
     }
 
     /*
@@ -97,7 +114,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public boolean remove( final String strKey, final String strBasePath, final Integer depth ) throws IOException
     {
-        return _dao.delete( strKey, strBasePath, depth );
+        return getDao( ).delete( strKey, strBasePath, depth );
     }
 
     /*
@@ -109,7 +126,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public BytesBlobStore findByPrimaryKey( final String strKey, final String strBasePath, final Integer depth ) throws IOException
     {
-        return _dao.load( strKey, strBasePath, depth );
+        return getDao( ).load( strKey, strBasePath, depth );
     }
 
     /*
@@ -121,7 +138,7 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     @Override
     public InputStream findByPrimaryKeyInputStream( final String strKey, final String strBasePath, final Integer depth ) throws IOException
     {
-        return _dao.loadInputStream( strKey, strBasePath, depth );
+        return getDao( ).loadInputStream( strKey, strBasePath, depth );
     }
 
     /*
@@ -134,6 +151,6 @@ public final class FileSystemBlobStoreHome implements IFileSystemBlobStoreHome
     public void createInputStream( final InputStreamBlobStore blobStore, final String strBasePath, final Integer depth )
             throws FileAlreadyExistsException, IOException
     {
-        _dao.insert( blobStore, strBasePath, depth );
+        getDao( ).insert( blobStore, strBasePath, depth );
     }
 }

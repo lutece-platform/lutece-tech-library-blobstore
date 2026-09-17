@@ -33,10 +33,11 @@
  */
 package fr.paris.lutece.plugins.blobstore.service;
 
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import org.apache.commons.fileupload.FileItem;
+import fr.paris.lutece.portal.service.upload.MultipartItem;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -46,10 +47,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import org.apache.commons.fileupload.FileItemHeaders;
 
 /**
- * Builds a fileItem from blobstore implementing {@link FileItem}. <br>
+ * Builds a fileItem from blobstore implementing {@link MultipartItem}. <br>
  * Metadata is stored in one blob, and content in another one. get() method is lazy preventing blob to be stored in-memory. Use
  * {@link #buildFileMetadata(String, long, String)} to build the FileMetadata.
  * 
@@ -57,7 +57,7 @@ import org.apache.commons.fileupload.FileItemHeaders;
  * @see #BlobStoreFileItem(String, IBlobStoreService)
  *
  */
-public class BlobStoreFileItem implements FileItem
+public class BlobStoreFileItem implements MultipartItem
 {
     public static final String JSON_KEY_FILE_SIZE = "fileSize";
     public static final String JSON_KEY_FILE_NAME = "fileName";
@@ -75,7 +75,7 @@ public class BlobStoreFileItem implements FileItem
 
     /**
      * Builds a fileItem from blobstore. get() method is lazy. The {@link IBlobStoreService} is here to prevent specific usage for the fileItem so it can be
-     * used as any other FileItem.
+     * used as any other MultipartItem.
      * 
      * @param strBlobId
      *            the blob id
@@ -97,16 +97,15 @@ public class BlobStoreFileItem implements FileItem
             throw new NoSuchBlobException( "No blob found for id " + strBlobId );
         }
 
-        JSONObject jsonObject = parseBlob( blob );
+        JsonNode jsonObject = parseBlob( blob );
 
         if ( jsonObject != null )
         {
-            String strSize = (String) jsonObject.get( JSON_KEY_FILE_SIZE );
-            _lFileSize = Long.parseLong( strSize );
-            _strFileName = (String) jsonObject.get( JSON_KEY_FILE_NAME );
+            _lFileSize = Long.parseLong( jsonObject.get( JSON_KEY_FILE_SIZE ).asText( ) );
+            _strFileName = jsonObject.get( JSON_KEY_FILE_NAME ).asText( );
             // store the real blob id - file will be fetch on demand (#get)
-            _strFileBlobId = (String) jsonObject.get( JSON_KEY_FILE_BLOB_ID );
-            _strContentType = jsonObject.getString( JSON_KEY_FILE_CONTENT_TYPE );
+            _strFileBlobId = jsonObject.get( JSON_KEY_FILE_BLOB_ID ).asText( );
+            _strContentType = jsonObject.get( JSON_KEY_FILE_CONTENT_TYPE ).asText( );
         }
         else
         {
@@ -201,7 +200,6 @@ public class BlobStoreFileItem implements FileItem
      * @throws IOException
      *             ioe
      */
-    @Override
     public OutputStream getOutputStream( ) throws IOException
     {
         throw new UnsupportedOperationException( );
@@ -219,7 +217,6 @@ public class BlobStoreFileItem implements FileItem
     /**
      * {@inheritDoc}
      */
-    @Override
     public String getString( )
     {
         return new String( get( ) );
@@ -228,7 +225,6 @@ public class BlobStoreFileItem implements FileItem
     /**
      * {@inheritDoc}
      */
-    @Override
     public String getString( String encoding ) throws UnsupportedEncodingException
     {
         return new String( get( ), encoding );
@@ -239,7 +235,6 @@ public class BlobStoreFileItem implements FileItem
      * 
      * @return false
      */
-    @Override
     public boolean isFormField( )
     {
         return false;
@@ -250,7 +245,6 @@ public class BlobStoreFileItem implements FileItem
      * 
      * @return false
      */
-    @Override
     public boolean isInMemory( )
     {
         return false;
@@ -262,7 +256,6 @@ public class BlobStoreFileItem implements FileItem
      * @param name
      *            -
      */
-    @Override
     public void setFieldName( String name )
     {
         // nothing
@@ -274,7 +267,6 @@ public class BlobStoreFileItem implements FileItem
      * @param state
      *            -
      */
-    @Override
     public void setFormField( boolean state )
     {
         // nothing
@@ -288,7 +280,6 @@ public class BlobStoreFileItem implements FileItem
      * @throws Exception
      *             ex
      */
-    @Override
     public void write( File file ) throws Exception
     {
         throw new UnsupportedOperationException( );
@@ -297,20 +288,19 @@ public class BlobStoreFileItem implements FileItem
     /**
      * {@inheritDoc}
      */
-    @Override
     public String toString( )
     {
         return "BlobId:" + _strBlobId + " FileBlobId:" + _strFileBlobId + " FileName:" + _strFileName;
     }
 
     /**
-     * Parses a blob to a JSONObject
+     * Parses a blob to a json node
      * 
      * @param blob
      *            the blob
-     * @return the {@link JSONObject}, <code>null</code> if blob is null or an exception occur
+     * @return the parsed node, <code>null</code> if blob is null or an exception occur
      */
-    private static JSONObject parseBlob( byte [ ] blob )
+    private static JsonNode parseBlob( byte [ ] blob )
     {
         if ( blob == null )
         {
@@ -319,11 +309,11 @@ public class BlobStoreFileItem implements FileItem
 
         try
         {
-            return JSONObject.fromObject( new String( blob ) );
+            return new ObjectMapper( ).readTree( new String( blob ) );
         }
-        catch( JSONException je )
+        catch( IOException ioe )
         {
-            _logger.error( je.getMessage( ), je );
+            _logger.error( ioe.getMessage( ), ioe );
         }
 
         return null;
@@ -344,22 +334,13 @@ public class BlobStoreFileItem implements FileItem
      */
     public static final String buildFileMetadata( String strFileName, long lSize, String strFileBlobId, String strContentType )
     {
-        JSONObject json = new JSONObject( );
-        json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_SIZE, Long.toString( lSize ) );
-        json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_NAME, strFileName );
-        json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_BLOB_ID, strFileBlobId );
-        json.accumulate( BlobStoreFileItem.JSON_KEY_FILE_CONTENT_TYPE, strContentType );
+        ObjectNode json = new ObjectMapper( ).createObjectNode( );
+        json.put( BlobStoreFileItem.JSON_KEY_FILE_SIZE, Long.toString( lSize ) );
+        json.put( BlobStoreFileItem.JSON_KEY_FILE_NAME, strFileName );
+        json.put( BlobStoreFileItem.JSON_KEY_FILE_BLOB_ID, strFileBlobId );
+        json.put( BlobStoreFileItem.JSON_KEY_FILE_CONTENT_TYPE, strContentType );
 
         return json.toString( );
     }
 
-    @Override
-    public FileItemHeaders getHeaders() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setHeaders(FileItemHeaders fih) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 }
