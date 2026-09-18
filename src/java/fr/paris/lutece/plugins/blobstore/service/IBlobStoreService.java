@@ -35,7 +35,7 @@ package fr.paris.lutece.plugins.blobstore.service;
 
 import java.io.InputStream;
 import java.io.Serializable;
-import org.apache.commons.fileupload.FileItem;
+import fr.paris.lutece.portal.service.upload.MultipartItem;
 
 /**
  * Blob Store Service Interface. <i>*InputStream</i> methods should be used for very large blobs.
@@ -79,12 +79,12 @@ public interface IBlobStoreService extends Serializable
     InputStream getBlobInputStream( String strKey );
 
     /**
-     * Stores a FileItem
+     * Stores a MultipartItem
      *
      * @param fileItem
      * @return The key of the blob
      */
-    String storeFileItem( FileItem fileItem );
+    String storeFileItem( MultipartItem fileItem );
 
     /**
      * Update a blob

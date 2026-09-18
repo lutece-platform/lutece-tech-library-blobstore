@@ -38,16 +38,33 @@ import fr.paris.lutece.plugins.blobstore.business.InputStreamBlobStore;
 
 import java.io.InputStream;
 
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * This class provides instances management methods (create, find, ...) for physical file objects
  */
-public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
+@ApplicationScoped
+@Named( DatabaseBlobStoreHome.BEAN_SERVICE )
+public class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
 {
     public static final String BEAN_SERVICE = "blobstore.databaseBlobStoreHome";
     @Inject
-    private IDatabaseBlobStoreDAO _dao;
+    private Instance<IDatabaseBlobStoreDAO> _dao;
+
+    /**
+     * Resolves the DAO, whose implementation is deployed by plugin-blobstore.
+     * 
+     * @return the DAO
+     * @throws jakarta.enterprise.inject.UnsatisfiedResolutionException
+     *             when no blob store DAO is deployed
+     */
+    private IDatabaseBlobStoreDAO getDao( )
+    {
+        return _dao.get( );
+    }
 
     /*
      * (non-Javadoc)
@@ -57,7 +74,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public String getLastPrimaryKey( )
     {
-        return _dao.loadLastPrimaryKey( );
+        return getDao( ).loadLastPrimaryKey( );
     }
 
     /*
@@ -68,7 +85,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public void create( BytesBlobStore blobStore )
     {
-        _dao.insert( blobStore );
+        getDao( ).insert( blobStore );
     }
 
     /*
@@ -79,7 +96,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public void update( BytesBlobStore blobStore )
     {
-        _dao.store( blobStore );
+        getDao( ).store( blobStore );
     }
 
     /*
@@ -91,7 +108,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public void updateInputStream( InputStreamBlobStore blobStore )
     {
-        _dao.store( blobStore );
+        getDao( ).store( blobStore );
     }
 
     /*
@@ -102,7 +119,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public void remove( String strKey )
     {
-        _dao.delete( strKey );
+        getDao( ).delete( strKey );
     }
 
     /*
@@ -113,7 +130,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public BytesBlobStore findByPrimaryKey( String strKey )
     {
-        return _dao.load( strKey );
+        return getDao( ).load( strKey );
     }
 
     /*
@@ -124,7 +141,7 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public InputStream findByPrimaryKeyInputStream( String strKey )
     {
-        return _dao.loadInputStream( strKey );
+        return getDao( ).loadInputStream( strKey );
     }
 
     /*
@@ -136,6 +153,6 @@ public final class DatabaseBlobStoreHome implements IDatabaseBlobStoreHome
     @Override
     public void createInputStream( InputStreamBlobStore blobStore )
     {
-        _dao.insert( blobStore );
+        getDao( ).insert( blobStore );
     }
 }

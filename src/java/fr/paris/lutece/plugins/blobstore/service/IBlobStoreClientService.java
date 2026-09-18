@@ -33,7 +33,7 @@
  */
 package fr.paris.lutece.plugins.blobstore.service;
 
-import org.apache.commons.fileupload.FileItem;
+import fr.paris.lutece.portal.service.upload.MultipartItem;
 
 /**
  *
@@ -81,7 +81,7 @@ public interface IBlobStoreClientService
      * @throws BlobStoreClientException
      *             exception if there is an issue
      */
-    String doUploadFile( String strBaseUrl, FileItem fileItem, String strBlobStore ) throws BlobStoreClientException;
+    String doUploadFile( String strBaseUrl, MultipartItem fileItem, String strBlobStore ) throws BlobStoreClientException;
 
     /**
      * Get the file url
@@ -115,9 +115,9 @@ public interface IBlobStoreClientService
      * 
      * @param strUrl
      *            the url of the file
-     * @return a {@link FileItem}
+     * @return a {@link MultipartItem}
      * @throws BlobStoreClientException
      *             exception if there is an error
      */
-    FileItem doDownloadFile( String strUrl ) throws BlobStoreClientException;
+    MultipartItem doDownloadFile( String strUrl ) throws BlobStoreClientException;
 }
