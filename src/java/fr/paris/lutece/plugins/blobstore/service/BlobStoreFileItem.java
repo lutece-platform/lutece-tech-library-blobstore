@@ -66,6 +66,7 @@ public class BlobStoreFileItem implements MultipartItem
     public static final String JSON_KEY_FILE_METADATA_BLOB_ID = "fileMetadata";
     private static final long serialVersionUID = 1L;
     private static Logger _logger = LogManager.getLogger( "lutece.blobstore" );
+    private static final ObjectMapper MAPPER = new ObjectMapper( );
     private final IBlobStoreService _blobstoreService;
     private final String _strBlobId;
     private String _strFileName;
@@ -99,18 +100,25 @@ public class BlobStoreFileItem implements MultipartItem
 
         JsonNode jsonObject = parseBlob( blob );
 
-        if ( jsonObject != null )
-        {
-            _lFileSize = Long.parseLong( jsonObject.get( JSON_KEY_FILE_SIZE ).asText( ) );
-            _strFileName = jsonObject.get( JSON_KEY_FILE_NAME ).asText( );
-            // store the real blob id - file will be fetch on demand (#get)
-            _strFileBlobId = jsonObject.get( JSON_KEY_FILE_BLOB_ID ).asText( );
-            _strContentType = jsonObject.get( JSON_KEY_FILE_CONTENT_TYPE ).asText( );
-        }
-        else
+        if ( jsonObject == null || !jsonObject.hasNonNull( JSON_KEY_FILE_SIZE ) || !jsonObject.hasNonNull( JSON_KEY_FILE_NAME )
+                || !jsonObject.hasNonNull( JSON_KEY_FILE_BLOB_ID ) || !jsonObject.has( JSON_KEY_FILE_CONTENT_TYPE ) )
         {
             throw new NoSuchBlobException( strBlobId );
         }
+
+        try
+        {
+            _lFileSize = Long.parseLong( jsonObject.get( JSON_KEY_FILE_SIZE ).asText( ) );
+        }
+        catch( NumberFormatException e )
+        {
+            throw new NoSuchBlobException( strBlobId );
+        }
+
+        _strFileName = jsonObject.get( JSON_KEY_FILE_NAME ).asText( );
+        // store the real blob id - file will be fetch on demand (#get)
+        _strFileBlobId = jsonObject.get( JSON_KEY_FILE_BLOB_ID ).asText( );
+        _strContentType = jsonObject.get( JSON_KEY_FILE_CONTENT_TYPE ).asText( );
     }
 
     /**
@@ -298,7 +306,7 @@ public class BlobStoreFileItem implements MultipartItem
      * 
      * @param blob
      *            the blob
-     * @return the parsed node, <code>null</code> if blob is null or an exception occur
+     * @return the parsed object, <code>null</code> if blob is null, is not a JSON object or an exception occur
      */
     private static JsonNode parseBlob( byte [ ] blob )
     {
@@ -309,7 +317,9 @@ public class BlobStoreFileItem implements MultipartItem
 
         try
         {
-            return new ObjectMapper( ).readTree( new String( blob ) );
+            JsonNode node = MAPPER.readTree( new String( blob ) );
+
+            return node.isObject( ) ? node : null;
         }
         catch( IOException ioe )
         {
@@ -334,7 +344,7 @@ public class BlobStoreFileItem implements MultipartItem
      */
     public static final String buildFileMetadata( String strFileName, long lSize, String strFileBlobId, String strContentType )
     {
-        ObjectNode json = new ObjectMapper( ).createObjectNode( );
+        ObjectNode json = MAPPER.createObjectNode( );
         json.put( BlobStoreFileItem.JSON_KEY_FILE_SIZE, Long.toString( lSize ) );
         json.put( BlobStoreFileItem.JSON_KEY_FILE_NAME, strFileName );
         json.put( BlobStoreFileItem.JSON_KEY_FILE_BLOB_ID, strFileBlobId );
